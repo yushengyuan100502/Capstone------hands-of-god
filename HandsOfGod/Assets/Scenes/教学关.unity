@@ -1228,7 +1228,7 @@ GameObject:
   - component: {fileID: 55232368}
   m_Layer: 0
   m_Name: TX Tileset - Dungeon Ground Dirt_9 (3)
-  m_TagString: Untagged
+  m_TagString: lowest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6959,7 +6959,7 @@ GameObject:
   - component: {fileID: 435207799}
   m_Layer: 0
   m_Name: TX Tileset - Dungeon Ground Dirt_9 (2)
-  m_TagString: Untagged
+  m_TagString: lowest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10137,7 +10137,7 @@ GameObject:
   - component: {fileID: 727849866}
   m_Layer: 0
   m_Name: TX Tileset - Dungeon Ground Dirt_9 (1)
-  m_TagString: Untagged
+  m_TagString: lowest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10234,7 +10234,7 @@ BoxCollider:
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 13, y: 1, z: 0.2}
+  m_Size: {x: 13, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &735608628
 GameObject:
@@ -14368,6 +14368,12 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6021908761996017299, guid: 504a541cbacd7b84984560aed316c4ba,
+        type: 3}
+      propertyPath: fireball
+      value: 
+      objectReference: {fileID: 7059921011307178329, guid: 2b8642800897c1d43908a60ee8bd9a2e,
+        type: 3}
     - target: {fileID: 6241473238247762877, guid: 504a541cbacd7b84984560aed316c4ba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -23559,7 +23565,7 @@ GameObject:
   - component: {fileID: 1713655540}
   m_Layer: 0
   m_Name: TX Dungeon Props - Barrel 01 A
-  m_TagString: Untagged
+  m_TagString: lowest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23665,7 +23671,7 @@ GameObject:
   - component: {fileID: 1728857336}
   m_Layer: 0
   m_Name: TX Dungeon Props - Bookshelf Side 01 B
-  m_TagString: Untagged
+  m_TagString: lowest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28112,7 +28118,7 @@ GameObject:
   - component: {fileID: 2083890098}
   m_Layer: 0
   m_Name: TX Tileset - Dungeon Ground Dirt_9
-  m_TagString: Untagged
+  m_TagString: lowest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29091,6 +29097,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TX Tileset - Dungeon Ground Dirt_9 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 576132739999510563, guid: aa102258fd9c2474e90214bf48c514d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: lowest
       objectReference: {fileID: 0}
     - target: {fileID: 8398272513318094978, guid: aa102258fd9c2474e90214bf48c514d3,
         type: 3}

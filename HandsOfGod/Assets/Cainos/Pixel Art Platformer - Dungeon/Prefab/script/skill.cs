@@ -54,7 +54,7 @@ public class skill : MonoBehaviour
             if (time<heldtime)
             {
                 GameObject new_fireball = Instantiate(fireball);
-                new_fireball.transform.rotation = transform.rotation;
+                new_fireball.transform.rotation = Quaternion.Euler(transform.rotation.x,-transform.rotation.y,90f);
                 new_fireball.GetComponent<fly>().fly_right = move.isit;
                 if (move.isit == false)
                 {

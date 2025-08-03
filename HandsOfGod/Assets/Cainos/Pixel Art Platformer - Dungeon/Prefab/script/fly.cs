@@ -29,7 +29,8 @@ public class fly : MonoBehaviour
         else
         {
             rb.velocity = new Vector3(-flyspeed, 0, 0);
- 
+            transform.rotation = Quaternion.Euler(0, 180, 90);
+
         }
         if ((Physics.Raycast(transform.position, Vector3.right, 0.6f)&& rb.velocity.x>0) || (Physics.Raycast(transform.position, Vector3.left, 0.6f)&& (rb.velocity.x<0)))
         {
