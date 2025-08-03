@@ -4,14 +4,7 @@ public class EnemyAI : MonoBehaviour
 {
     public enum EnemyType
     {
-        Mone,       // Basic melee attacker
-        Cairo,      // Fast mover
-        Talk,       // Stationary shooter
-        Ertry,      // Area attacker
-        Stunted,    // Small but numerous
-        Julero,     // Jumping attacker
-        Specialkrtles, // Special abilities
-        Death       // Strong final enemy
+        Mone, Cairo, Talk, Ertry, Stunted, Julero, Specialkrtles, Death
     }
 
     public EnemyType enemyType;
@@ -23,7 +16,7 @@ public class EnemyAI : MonoBehaviour
     public float attackRadius = 0.7f;
     public LayerMask playerLayer;
     public float specialAbilityCooldown = 5f;
-    public Projectile projectilePrefab; // For ranged enemies
+    public Projectile projectilePrefab;
 
     private Transform player;
     private Animator animator;
@@ -35,8 +28,9 @@ public class EnemyAI : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        
-        // Initialize enemy based on type
+
+        Debug.Log($"[Init] Enemy Type: {enemyType}");
+
         InitializeEnemyType();
     }
 
@@ -53,21 +47,15 @@ public class EnemyAI : MonoBehaviour
                 attackDamage = 8;
                 break;
             case EnemyType.Talk:
-                moveSpeed = 0f; // Stationary
-                attackRange = 5f; // Ranged attack
+                moveSpeed = 0f;
+                attackRange = 5f;
                 break;
             case EnemyType.Ertry:
-                attackRadius = 1.5f; // Larger attack area
+                attackRadius = 1.5f;
                 break;
             case EnemyType.Stunted:
                 transform.localScale *= 0.7f;
                 attackDamage = 5;
-                break;
-            case EnemyType.Julero:
-                // This enemy would need a jump component added
-                break;
-            case EnemyType.Specialkrtles:
-                // Special abilities handled in update
                 break;
             case EnemyType.Death:
                 moveSpeed = 1.5f;
@@ -83,15 +71,14 @@ public class EnemyAI : MonoBehaviour
 
         float distance = Vector2.Distance(transform.position, player.position);
 
-        // Handle facing direction
         UpdateFacingDirection();
 
         if (distance <= attackRange)
         {
-            // Attack behavior based on enemy type
+            Debug.Log($"[Combat] {enemyType} is attacking (distance {distance:F2})");
+
             HandleAttackBehavior();
-            
-            // Stop moving for most enemies (except maybe some special cases)
+
             if (enemyType != EnemyType.Specialkrtles)
             {
                 animator.SetBool("isMoving", false);
@@ -99,11 +86,9 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            // Movement behavior based on enemy type
             HandleMovementBehavior(distance);
         }
 
-        // Special abilities for certain enemies
         HandleSpecialAbilities(distance);
     }
 
@@ -123,48 +108,47 @@ public class EnemyAI : MonoBehaviour
     {
         isFacingRight = !isFacingRight;
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        Debug.Log($"[Flip] Facing {(isFacingRight ? "right" : "left")}");
     }
 
     void HandleAttackBehavior()
     {
+        if (Time.time < lastAttackTime + attackCooldown) return;
+
         switch (enemyType)
         {
-            case EnemyType.Talk: // Ranged attacker
-                if (Time.time >= lastAttackTime + attackCooldown)
-                {
-                    animator.SetTrigger("AttackTrigger");
-                    lastAttackTime = Time.time;
-                }
+            case EnemyType.Talk:
+                Debug.Log("[Attack] Ranged attack triggered");
+                animator.SetTrigger("AttackTrigger");
                 break;
-                
-            default: // Melee attacker
-                if (Time.time >= lastAttackTime + attackCooldown)
-                {
-                    animator.SetTrigger("AttackTrigger");
-                    lastAttackTime = Time.time;
-                }
+
+            default:
+                Debug.Log("[Attack] Melee attack triggered");
+                animator.SetTrigger("AttackTrigger");
                 break;
         }
+
+        lastAttackTime = Time.time;
     }
 
     void HandleMovementBehavior(float distance)
     {
         switch (enemyType)
         {
-            case EnemyType.Talk: // Stationary
+            case EnemyType.Talk:
                 animator.SetBool("isMoving", false);
                 break;
-                
-            case EnemyType.Julero: // Jumping movement
-                // Implement jumping logic here
-                // Move towards player while jumping
+
+            case EnemyType.Julero:
                 animator.SetBool("isMoving", true);
                 transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+                Debug.Log($"[Move] Julero jumping toward player (distance {distance:F2})");
                 break;
-                
-            default: // Standard movement
+
+            default:
                 animator.SetBool("isMoving", true);
                 transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+                Debug.Log($"[Move] {enemyType} moving toward player (distance {distance:F2})");
                 break;
         }
     }
@@ -173,17 +157,15 @@ public class EnemyAI : MonoBehaviour
     {
         if (enemyType == EnemyType.Specialkrtles && Time.time >= lastAbilityTime + specialAbilityCooldown)
         {
-            // Example special ability - dash attack
             if (distance > attackRange && distance < attackRange * 3)
             {
+                Debug.Log("[Special] Executing special ability (dash)");
                 animator.SetTrigger("SpecialAbility");
                 lastAbilityTime = Time.time;
             }
         }
     }
 
-    // Called from animation event for melee attacks
-    // 在 EnemyAI 脚本中修改 DealDamage 方法
     public void DealDamage()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, playerLayer);
@@ -192,12 +174,12 @@ public class EnemyAI : MonoBehaviour
             PlayerHealth playerHealth = hit.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
+                Debug.Log($"[Damage] Dealt {attackDamage} damage to Player");
                 playerHealth.TakeDamage(attackDamage);
             }
         }
     }
 
-    // Called from animation event for ranged attacks
     public void FireProjectile()
     {
         if (projectilePrefab != null)
@@ -205,17 +187,17 @@ public class EnemyAI : MonoBehaviour
             Projectile projectile = Instantiate(projectilePrefab, attackPoint.position, Quaternion.identity);
             Vector2 direction = (player.position - attackPoint.position).normalized;
             projectile.SetDirection(direction);
+            Debug.Log("[Projectile] Fired projectile toward player");
         }
     }
 
-    // Called from animation event for special abilities
     public void ExecuteSpecialAbility()
     {
-        // Example dash ability for Specialkrtles
         if (enemyType == EnemyType.Specialkrtles)
         {
             Vector2 dashDirection = (player.position - transform.position).normalized;
             transform.position += (Vector3)(dashDirection * attackRange * 1.5f);
+            Debug.Log("[Special] Dashed toward player");
         }
     }
 

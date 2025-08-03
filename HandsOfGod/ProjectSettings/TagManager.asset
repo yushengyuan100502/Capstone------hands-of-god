@@ -4,13 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-<<<<<<< Updated upstream
-  - Door
-=======
   - die
   - "can\u2018t jump"
   - top
->>>>>>> Stashed changes
   - lowest
   layers:
   - Default
@@ -19,8 +15,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Boss
+  - Player
   - 
   - 
   - 
