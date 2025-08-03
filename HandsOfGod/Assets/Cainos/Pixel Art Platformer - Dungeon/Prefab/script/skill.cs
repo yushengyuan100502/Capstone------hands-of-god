@@ -6,6 +6,7 @@ public class skill : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject fireball;
+    public move mooo;
     public GameObject firepillar;
     public float heldtime = 0.3f;
     float time = 0f;
@@ -19,6 +20,7 @@ public class skill : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        mooo = GetComponent<move>();
     }
     void Update()
     {
@@ -30,11 +32,10 @@ public class skill : MonoBehaviour
                 if (isfire==false)
                 {
                     fire = Instantiate(firepillar);
-                    fire.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
                 }
-                fire.GetComponent<rotate>().flyright = move.right;
+                fire.GetComponent<rotate>().flyright = move.isit;
                 isfire = true;
-                if (move.right == false)
+                if (move.isit == false)
                 {
                     fire.transform.position = new Vector3(transform.position.x - 3.3f, transform.position.y, transform.position.z);
                 }
@@ -54,8 +55,8 @@ public class skill : MonoBehaviour
             {
                 GameObject new_fireball = Instantiate(fireball);
                 new_fireball.transform.rotation = transform.rotation;
-                new_fireball.GetComponent<fly>().fly_right = move.right;
-                if (move.right == false)
+                new_fireball.GetComponent<fly>().fly_right = move.isit;
+                if (move.isit == false)
                 {
                     new_fireball.transform.position = new Vector3(transform.position.x - 0.8f, transform.position.y, transform.position.z);
                 }

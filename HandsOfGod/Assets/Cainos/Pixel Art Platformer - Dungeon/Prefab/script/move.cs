@@ -25,6 +25,7 @@ public class move : MonoBehaviour
     bool candown = false;
     bool canup = false;
     bool doing = false;
+    public static bool isit = true;
     string x = "";
 
     void Start()
@@ -81,6 +82,7 @@ public class move : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             x= "left";
+            isit = false;
             transform.rotation = Quaternion.Euler(0,0,0);
             if (notrigger == false)
             {
@@ -91,6 +93,7 @@ public class move : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             x = "right";
+            isit = true;
             transform.rotation = Quaternion.Euler(0, 180, 0);
             if (notrigger == false)
             {
