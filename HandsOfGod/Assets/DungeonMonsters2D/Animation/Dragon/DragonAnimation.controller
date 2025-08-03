@@ -88,31 +88,31 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -5308216943816245398}
-    m_Position: {x: 220, y: 160, z: 0}
+    m_Position: {x: -30, y: 640, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3942610697287538840}
-    m_Position: {x: 220, y: 30, z: 0}
+    m_Position: {x: -240, y: -300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1886661871251496921}
-    m_Position: {x: 450, y: 90, z: 0}
+    m_Position: {x: 510, y: 530, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 547046659980487195}
     m_Position: {x: 220, y: -120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6590903340607972877}
-    m_Position: {x: 220, y: 90, z: 0}
+    m_Position: {x: -260, y: 370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7645206152784429428}
-    m_Position: {x: 220, y: -30, z: 0}
+    m_Position: {x: 130, y: -340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6637492386302821641}
-    m_Position: {x: 450, y: 160, z: 0}
+    m_Position: {x: 690, y: 340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2643461505716286733}
-    m_Position: {x: 450, y: 20, z: 0}
+    m_Position: {x: 690, y: 60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2518930950459252685}
-    m_Position: {x: 470, y: -50, z: 0}
+    m_Position: {x: 650, y: -320, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -8538785557602796017}
@@ -391,7 +391,7 @@ AnimatorController:
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 9100000}
   - m_Name: TalkTrigger
     m_Type: 9
