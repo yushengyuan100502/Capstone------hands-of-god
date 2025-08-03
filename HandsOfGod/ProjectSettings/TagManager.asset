@@ -4,7 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< Updated upstream
   - Door
+=======
+  - die
+  - "can\u2018t jump"
+  - top
+>>>>>>> Stashed changes
   - lowest
   layers:
   - Default
@@ -42,4 +48,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Boss
+    uniqueID: 943917819
     locked: 0

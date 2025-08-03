@@ -45,7 +45,7 @@ public class EnemyAI : MonoBehaviour
         switch (enemyType)
         {
             case EnemyType.Mone:
-                moveSpeed = 2f;
+                moveSpeed = 50f;
                 attackDamage = 15;
                 break;
             case EnemyType.Cairo:
@@ -183,12 +183,17 @@ public class EnemyAI : MonoBehaviour
     }
 
     // Called from animation event for melee attacks
+    // 在 EnemyAI 脚本中修改 DealDamage 方法
     public void DealDamage()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, playerLayer);
         foreach (var hit in hits)
         {
-            hit.GetComponent<PlayerHealth>()?.TakeDamage(attackDamage);
+            PlayerHealth playerHealth = hit.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(attackDamage);
+            }
         }
     }
 
