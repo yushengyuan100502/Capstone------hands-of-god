@@ -382,12 +382,30 @@ public class SlimeEnemy : MonoBehaviour
     {
         Debug.Log("Slime defeated!");
         
+        // Trigger death animation
+        if (animator != null)
+        {
+            animator.SetBool("die", true);
+        }
+        
+        // Disable AI and movement while death animation plays
+        currentState = EnemyState.Idle;
+        
         // Spawn enemies on death if enabled and not already spawned
         if (enableEnemySpawning && spawnOnDeath && !hasSpawnedOnDeath)
         {
             hasSpawnedOnDeath = true;
             SpawnEnemies();
         }
+        
+        // Start death sequence
+        StartCoroutine(DeathSequence());
+    }
+    
+    IEnumerator DeathSequence()
+    {
+        // Wait for death animation to play (adjust time as needed)
+        yield return new WaitForSeconds(1.0f);
         
         // Add death effects here (particles, sound, etc.)
         Destroy(gameObject);
