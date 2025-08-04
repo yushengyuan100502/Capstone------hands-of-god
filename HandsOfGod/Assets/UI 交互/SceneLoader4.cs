@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+public class SceneLoader4 : MonoBehaviour
 {
-    public string nextSceneName = "教程";
+    public string nextSceneName = "教学关";
     public void LoadNextScene()
     {
         SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);

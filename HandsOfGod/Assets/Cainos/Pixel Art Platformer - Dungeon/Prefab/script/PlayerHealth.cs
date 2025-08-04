@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
+    
     public int maxHealth = 100;
     public bool hasShield = false;
     private int currentHealth;
@@ -19,6 +21,8 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+            string nextSceneName = "5";
+            SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
         }
     }   
 

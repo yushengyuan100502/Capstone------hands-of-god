@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader1 : MonoBehaviour
+public class SceneLoader6 : MonoBehaviour
 
 {
     public bool door = false;
@@ -19,7 +19,7 @@ public class SceneLoader1 : MonoBehaviour
     {
         if (door && Input.GetKeyDown(KeyCode.V))
         {
-            string nextSceneName = "2";
+            string nextSceneName = "Finish";
             SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
         }
     }
