@@ -19,6 +19,16 @@ public class SlimeEnemy : MonoBehaviour
     [Header("Attack Settings")]
     public int damage = 20;
     public float attackCooldown = 1f;
+    public int contactDamage = 15; // Damage when touching player
+    
+    [Header("Health Settings")]
+    public int maxHealth = 100;
+    private int currentHealth;
+    
+    [Header("Knockback Settings")]
+    public float knockbackForce = 4f;
+    public float knockbackDuration = 0.3f;
+    private bool isKnockedBack = false;
     
     [Header("AI Settings")]
     public float patrolDistance = 5f;
@@ -64,6 +74,9 @@ public class SlimeEnemy : MonoBehaviour
         startPosition = transform.position;
         SetNewPatrolTarget();
         
+        // Initialize health
+        currentHealth = maxHealth;
+        
         // Freeze Z rotation to keep it 2D
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
     }
@@ -93,7 +106,7 @@ public class SlimeEnemy : MonoBehaviour
     
     void UpdateAI()
     {
-        if (player == null) return;
+        if (player == null || isKnockedBack) return;
         
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         
@@ -329,12 +342,55 @@ public class SlimeEnemy : MonoBehaviour
     // Damage system for the enemy
     public void TakeDamage(int damageAmount)
     {
-        Debug.Log("Slime took " + damageAmount + " damage!");
-        // Add damage effects here (like knockback, color change, etc.)
+        currentHealth -= damageAmount;
+        Debug.Log("Slime took " + damageAmount + " damage! Health: " + currentHealth + "/" + maxHealth);
         
-        // Example: Simple death after taking any damage
-        // You can expand this to have health points
+        // Apply knockback effect
+        if (player != null)
+        {
+            Vector3 knockbackDirection = (transform.position - player.transform.position).normalized;
+            StartCoroutine(ApplyKnockback(knockbackDirection));
+        }
+        
+        // Check if enemy should die
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    
+    void Die()
+    {
+        Debug.Log("Slime defeated!");
+        // Add death effects here (particles, sound, etc.)
         Destroy(gameObject);
+    }
+    
+    IEnumerator ApplyKnockback(Vector3 direction)
+    {
+        isKnockedBack = true;
+        
+        // Apply knockback force
+        rb.velocity = new Vector3(direction.x * knockbackForce, 0, 0);
+        
+        // Wait for knockback duration
+        yield return new WaitForSeconds(knockbackDuration);
+        
+        isKnockedBack = false;
+    }
+    
+    // Contact damage when slime touches player
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+            if (playerHealth != null && !isKnockedBack)
+            {
+                playerHealth.TakeDamage(contactDamage);
+                Debug.Log("Slime touched player for " + contactDamage + " contact damage!");
+            }
+        }
     }
     
     // Visual debugging

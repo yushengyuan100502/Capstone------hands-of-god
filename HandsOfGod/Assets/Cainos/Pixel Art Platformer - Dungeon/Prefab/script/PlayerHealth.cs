@@ -5,7 +5,7 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 100;
     private int currentHealth;
     public bool isInvincible = false; // 无敌状态（受击后短暂无敌）
-    public float invincibilityTime = 1f;
+    public float invincibilityTime = 2.5f;
     private float invincibilityTimer = 0f;
     public SpriteRenderer spriteRenderer; // 用于受击闪烁效果
 
