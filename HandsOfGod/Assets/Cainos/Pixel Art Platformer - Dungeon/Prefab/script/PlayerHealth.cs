@@ -71,4 +71,30 @@ public class PlayerHealth : MonoBehaviour
         // 这里可以添加死亡动画、游戏结束逻辑等
         Destroy(gameObject);
     }
+    
+    // Public methods for UI access
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+    
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
+    
+    public float GetHealthPercentage()
+    {
+        return (float)currentHealth / maxHealth;
+    }
+    
+    public bool IsInvincible()
+    {
+        return isInvincible;
+    }
+    
+    public bool HasShield()
+    {
+        return hasShield;
+    }
 }

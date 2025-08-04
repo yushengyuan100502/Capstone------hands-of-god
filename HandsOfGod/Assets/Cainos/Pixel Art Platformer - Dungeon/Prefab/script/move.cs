@@ -154,14 +154,14 @@ public class move : MonoBehaviour
         {
             candown = true;
         }
-        if (collision.collider.CompareTag("can't jump") && collision.collider.transform.position.y < transform.position.y)
-        {
-            canup = false;
-        }
-        else if (collision.collider.CompareTag("can't jump")==false && collision.collider.transform.position.y < transform.position.y)
-        {
-            canup = true;
-        }
+        //if (collision.collider.CompareTag("can't jump") && collision.collider.transform.position.y < transform.position.y)
+        //{
+        //    canup = false;
+        //}
+        //else if (collision.collider.CompareTag("can't jump")==false && collision.collider.transform.position.y < transform.position.y)
+        //{
+        //    canup = true;
+        //}
     }
 
 }
