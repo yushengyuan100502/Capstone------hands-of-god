@@ -347,7 +347,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "W, A, S, D, control up, down, left, and right. \n\nE opens the shield
-    to resist damage.\n\n Left click of the mouse, or Q to shoot a fireball."
+    to resist damage.\n\nQ to shoot a fireball.\n\nF repel the enemy"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
