@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class fly : MonoBehaviour
 {
-    // Start is called before the first frame update
     private Rigidbody rb;
     private SpriteRenderer sr;
     public Sprite blast;
@@ -13,16 +12,16 @@ public class fly : MonoBehaviour
     public float flyspeed = 0;
     public int damage = 50; // Damage dealt to enemies
     private bool hasDealtDamage = false; // Prevent multiple damage instances
-    
+    public float explosionRadius = 2f; // 爆炸范围半径
+
     void Start()
     {
-        rb=GetComponent<Rigidbody>();
-        sr=GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     public bool fly_right = true;
 
-    // Update is called once per frame
     void Update()
     {
         if (fly_right)
@@ -33,40 +32,73 @@ public class fly : MonoBehaviour
         {
             rb.velocity = new Vector3(-flyspeed, 0, 0);
             transform.rotation = Quaternion.Euler(0, 180, 90);
-
         }
-        // Only check for collisions if we haven't dealt damage yet
+
+        // 检测周围敌人
+        if (!hasDealtDamage)
+        {
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius);
+            foreach (var hitCollider in hitColliders)
+            {
+                SlimeEnemy enemy = hitCollider.GetComponent<SlimeEnemy>();
+                if (enemy != null)
+                {
+                    Explode();
+                    break; // 找到一个敌人就触发爆炸
+                }
+            }
+        }
+
+        // 原有的射线检测（保留作为碰到墙壁时的爆炸触发）
         if (!hasDealtDamage)
         {
             RaycastHit hit;
             Vector3 rayDirection = fly_right ? Vector3.right : Vector3.left;
-            
+
             if (Physics.Raycast(transform.position, rayDirection, out hit, 0.6f))
             {
-                // Check if we hit an enemy
-                SlimeEnemy enemy = hit.collider.GetComponent<SlimeEnemy>();
-                if (enemy != null && !hasDealtDamage)
-                {
-                    enemy.TakeDamage(damage);
-                    Debug.Log("Fireball hit enemy for " + damage + " damage!");
-                    hasDealtDamage = true; // Mark that we've dealt damage
-                }
-                
-                // Hit something (wall or enemy), start exploding
-                rb.velocity = Vector3.zero;
-                sr.sprite = blast;
-                hasDealtDamage = true; // Prevent further damage
+                Explode();
             }
         }
-        
+
         // Handle explosion countdown
         if (hasDealtDamage || sr.sprite == blast)
         {
             cnt -= Time.deltaTime;
         }
-        if (cnt<=0)
+        if (cnt <= 0)
         {
             Destroy(gameObject);
         }
+    }
+
+    // 爆炸方法
+    private void Explode()
+    {
+        if (hasDealtDamage) return; // 防止重复伤害
+
+        // 改变外观为爆炸效果
+        rb.velocity = Vector3.zero;
+        sr.sprite = blast;
+        hasDealtDamage = true;
+
+        // 对范围内所有敌人造成伤害
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (var hitCollider in hitColliders)
+        {
+            SlimeEnemy enemy = hitCollider.GetComponent<SlimeEnemy>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+                Debug.Log("Fireball exploded and hit enemy for " + damage + " damage!");
+            }
+        }
+    }
+
+    // 可选：在编辑器中显示爆炸范围
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
 }
