@@ -68,7 +68,7 @@ public class newskill : MonoBehaviour
         }
         
         // Shield ability with mana check
-        if (Input.GetMouseButtonDown(1) && !isShieldActive && HasEnoughMana(shieldManaCost))
+        if (Input.GetKeyDown(KeyCode.E) && !isShieldActive && HasEnoughMana(shieldManaCost))
         {
             UseMana(shieldManaCost);
             
