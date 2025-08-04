@@ -19,7 +19,7 @@ public class SceneLoader1 : MonoBehaviour
     {
         if (door && Input.GetKeyDown(KeyCode.V))
         {
-            string nextSceneName = "2";
+            string nextSceneName = "4";
             SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
         }
     }
