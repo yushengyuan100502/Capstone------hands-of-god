@@ -92,7 +92,7 @@ public class newskill : MonoBehaviour
             
             Debug.Log("Shield activated! Mana remaining: " + currentMana);
         }
-        else if (Input.GetMouseButtonDown(1) && !isShieldActive && !HasEnoughMana(shieldManaCost))
+        else if (Input.GetKeyDown(KeyCode.E) && !isShieldActive && !HasEnoughMana(shieldManaCost))
         {
             Debug.Log("Not enough mana for shield! Need: " + shieldManaCost + ", Have: " + currentMana);
             if (statusUI != null)
@@ -102,7 +102,7 @@ public class newskill : MonoBehaviour
         bool isPlayerMoving = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
         
         // Handle input when not enough mana to start charging
-        if ((Input.GetKeyDown(KeyCode.Q) || Input.GetMouseButtonDown(0)) && !HasEnoughMana(fireballManaCost))
+        if (Input.GetKeyDown(KeyCode.Q) && !HasEnoughMana(fireballManaCost))
         {
             Debug.Log("Not enough mana to cast fireball! Need: " + fireballManaCost + ", Have: " + currentMana);
             if (statusUI != null)
@@ -110,14 +110,14 @@ public class newskill : MonoBehaviour
         }
         
         // Handle input when player is moving (prevent fireball casting while moving)
-        if ((Input.GetKeyDown(KeyCode.Q) || Input.GetMouseButtonDown(0)) && isPlayerMoving)
+        if (Input.GetKeyDown(KeyCode.Q) && isPlayerMoving)
         {
             Debug.Log("Cannot cast fireball while moving! Stand still to cast.");
         }
         
         // Check for both Q key and left mouse button for charging (with mana check)
         // Only allow fireball casting when player is standing still (not pressing A or D)
-        if ((Input.GetKey(KeyCode.Q) || Input.GetMouseButton(0)) && HasEnoughMana(fireballManaCost) && !isPlayerMoving)
+        if (Input.GetKey(KeyCode.Q)&& HasEnoughMana(fireballManaCost) && !isPlayerMoving)
         {
             time += Time.deltaTime;
             if (time > heldtime && HasEnoughMana(firePillarManaCost))
@@ -151,7 +151,7 @@ public class newskill : MonoBehaviour
             Debug.Log("Fireball charging cancelled - player started moving!");
         }
         // Check for both Q key release and left mouse button release
-        if (Input.GetKeyUp(KeyCode.Q) || Input.GetMouseButtonUp(0))
+        if (Input.GetKeyUp(KeyCode.Q))
         {
             if (time > 0) // Only process if we were actually charging
             {
