@@ -14040,8 +14040,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3559336909592540136, guid: a975fce1bf0b54e03afbd08fc202987e,
         type: 3}
+      propertyPath: hasShield
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3559336909592540136, guid: a975fce1bf0b54e03afbd08fc202987e,
+        type: 3}
       propertyPath: maxHealth
-      value: 1000
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 5222581727953885599, guid: a975fce1bf0b54e03afbd08fc202987e,
         type: 3}
