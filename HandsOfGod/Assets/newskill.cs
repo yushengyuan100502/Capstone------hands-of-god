@@ -31,29 +31,33 @@ public class newskill : MonoBehaviour
         yield return new WaitForSeconds(delay);
         if (currentShield != null)
         {
-            Destroy(currentShield);
+         Destroy(currentShield);
         }
-    isShieldActive = false;
+        isShieldActive = false;
+
+        // 取消护盾免疫状态
+        GetComponent<PlayerHealth>().hasShield = false;
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(1) && !isShieldActive)
+            if (Input.GetMouseButtonDown(1) && !isShieldActive)
     {
         currentShield = Instantiate(shieldPrefab, transform);
 
-// 设置护盾生成位置：前方 + 上方
-        //float offsetX = move.isit ? 1.2f : -1.2f;   // 朝右 or 朝左
-        float offsetY = 1f;                       // 向上偏移一点
+        float offsetY = 1f;
         currentShield.transform.localPosition = new Vector3(0, offsetY, 0f);
 
-// 如果朝左，翻转护盾朝向（如果护盾贴图默认是右）
         if (!move.isit)
-        {
+        {   
             Vector3 localScale = currentShield.transform.localScale;
-            localScale.x = -Mathf.Abs(localScale.x);  // 镜像翻转
+            localScale.x = -Mathf.Abs(localScale.x);
             currentShield.transform.localScale = localScale;
         }
+
+    // 设置护盾状态
         isShieldActive = true;
+        GetComponent<PlayerHealth>().hasShield = true;
+
         StartCoroutine(RemoveShieldAfterDelay(shieldDuration));
     }
         if (Input.GetKey(KeyCode.Q))
