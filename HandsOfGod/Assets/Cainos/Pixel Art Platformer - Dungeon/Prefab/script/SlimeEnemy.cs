@@ -34,6 +34,18 @@ public class SlimeEnemy : MonoBehaviour
     public float patrolDistance = 5f;
     public float idleTime = 2f;
     
+    [Header("Enemy Spawning Settings")]
+    public bool enableEnemySpawning = false;
+    public GameObject enemyPrefabToSpawn;
+    public int numberOfEnemiesToSpawn = 2;
+    public float spawnRadius = 3f;
+    public bool spawnOnDeath = true;
+    public bool spawnOnAttack = false;
+    public bool spawnOnInterval = false;
+    public float spawnInterval = 10f; // Time between interval spawns
+    private float spawnTimer = 0f;
+    private bool hasSpawnedOnDeath = false;
+    
     // Private variables
     private Rigidbody rb;
     private SpriteRenderer spriteRenderer;
@@ -86,6 +98,7 @@ public class SlimeEnemy : MonoBehaviour
         CheckGrounded();
         UpdateAI();
         UpdateAnimation();
+        UpdateSpawning();
     }
     
     void CheckGrounded()
@@ -227,6 +240,12 @@ public class SlimeEnemy : MonoBehaviour
         // Start attack cooldown
         StartCoroutine(AttackCooldownRoutine());
         
+        // Spawn enemies on attack if enabled
+        if (enableEnemySpawning && spawnOnAttack)
+        {
+            SpawnEnemies();
+        }
+        
         // Jump back after attacking
         if (canJump && isGrounded)
         {
@@ -362,6 +381,14 @@ public class SlimeEnemy : MonoBehaviour
     void Die()
     {
         Debug.Log("Slime defeated!");
+        
+        // Spawn enemies on death if enabled and not already spawned
+        if (enableEnemySpawning && spawnOnDeath && !hasSpawnedOnDeath)
+        {
+            hasSpawnedOnDeath = true;
+            SpawnEnemies();
+        }
+        
         // Add death effects here (particles, sound, etc.)
         Destroy(gameObject);
     }
@@ -393,6 +420,87 @@ public class SlimeEnemy : MonoBehaviour
         }
     }
     
+    // Enemy spawning methods
+    void UpdateSpawning()
+    {
+        if (!enableEnemySpawning || !spawnOnInterval) return;
+        
+        spawnTimer += Time.deltaTime;
+        if (spawnTimer >= spawnInterval)
+        {
+            SpawnEnemies();
+            spawnTimer = 0f;
+        }
+    }
+    
+    void SpawnEnemies()
+    {
+        if (enemyPrefabToSpawn == null)
+        {
+            Debug.LogWarning("SlimeEnemy: No enemy prefab set for spawning!");
+            return;
+        }
+        
+        for (int i = 0; i < numberOfEnemiesToSpawn; i++)
+        {
+            // Calculate random spawn position around the slime (same Z position)
+            Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
+            Vector3 spawnPosition = new Vector3(
+                transform.position.x + randomCircle.x, 
+                transform.position.y, 
+                transform.position.z  // Keep same Z position as slime
+            );
+            
+            // Check if spawn position is valid (not inside walls, etc.)
+            if (IsValidSpawnPosition(spawnPosition))
+            {
+                GameObject spawnedEnemy = Instantiate(enemyPrefabToSpawn, spawnPosition, Quaternion.identity);
+                Debug.Log("Slime spawned enemy at position: " + spawnPosition);
+            }
+            else
+            {
+                // Try spawning at a different position
+                for (int attempt = 0; attempt < 5; attempt++)
+                {
+                    randomCircle = Random.insideUnitCircle * spawnRadius;
+                    spawnPosition = new Vector3(
+                        transform.position.x + randomCircle.x, 
+                        transform.position.y, 
+                        transform.position.z  // Keep same Z position as slime
+                    );
+                    
+                    if (IsValidSpawnPosition(spawnPosition))
+                    {
+                        GameObject spawnedEnemy = Instantiate(enemyPrefabToSpawn, spawnPosition, Quaternion.identity);
+                        Debug.Log("Slime spawned enemy at position: " + spawnPosition + " (attempt " + (attempt + 1) + ")");
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
+    bool IsValidSpawnPosition(Vector3 position)
+    {
+        // Check if there's ground beneath the spawn position
+        bool hasGround = Physics.Raycast(position + Vector3.up * 0.5f, Vector3.down, 2f, groundLayerMask);
+        
+        // Check if the spawn position is not occupied by other objects
+        Collider[] overlapping = Physics.OverlapSphere(position, 0.5f);
+        bool isOccupied = false;
+        
+        foreach (Collider col in overlapping)
+        {
+            if (col.gameObject != gameObject && !col.isTrigger)
+            {
+                isOccupied = true;
+                break;
+            }
+        }
+        
+        return hasGround && !isOccupied;
+    }
+    
     // Visual debugging
     void OnDrawGizmosSelected()
     {
@@ -419,6 +527,13 @@ public class SlimeEnemy : MonoBehaviour
         {
             Gizmos.DrawWireCube(startPosition, new Vector3(patrolDistance * 2, 1, 1));
             Gizmos.DrawSphere(patrolTarget, 0.5f);
+        }
+        
+        // Enemy spawn radius
+        if (enableEnemySpawning)
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(transform.position, spawnRadius);
         }
     }
 }
