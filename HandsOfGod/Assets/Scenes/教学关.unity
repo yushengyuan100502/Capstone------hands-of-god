@@ -14523,11 +14523,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
-    - target: {fileID: 3635193965342067354, guid: 504a541cbacd7b84984560aed316c4ba,
+    - target: {fileID: 6021908761996017299, guid: 504a541cbacd7b84984560aed316c4ba,
         type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
+      propertyPath: leidian
+      value: 
+      objectReference: {fileID: 1835634940833374000, guid: 2a2306995f16afc4a85b96e68431bbd8,
+        type: 3}
     - target: {fileID: 6241473238247762877, guid: 504a541cbacd7b84984560aed316c4ba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14578,8 +14579,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3952988759268687947, guid: 504a541cbacd7b84984560aed316c4ba, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

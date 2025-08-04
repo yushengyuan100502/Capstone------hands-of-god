@@ -146,19 +146,19 @@ public class move : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("lowest"))
+        if (collision.collider.CompareTag("lowest") || collision.collider.CompareTag("ememy"))
         {
             candown = false;
         }
-        else if (collision.collider.CompareTag("lowest")==false && collision.collider.transform.position.y<transform.position.y)
+        else if (collision.collider.CompareTag("lowest")==false && collision.collider.transform.position.y<transform.position.y && collision.collider.CompareTag("ememy") == false)
         {
             candown = true;
         }
-        if (collision.collider.CompareTag("can't jump") && collision.collider.transform.position.y < transform.position.y)
+        if ((collision.collider.CompareTag("can't jump")|| collision.collider.CompareTag("ememy")) && collision.collider.transform.position.y < transform.position.y)
         {
             canup = false;
         }
-        else if (collision.collider.CompareTag("can't jump")==false && collision.collider.transform.position.y < transform.position.y)
+        else if (collision.collider.CompareTag("can't jump")==false && collision.collider.transform.position.y < transform.position.y && collision.collider.CompareTag("ememy")==false)
         {
             canup = true;
         }

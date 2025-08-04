@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 7315474925357154825}
   - component: {fileID: 6021908761996017299}
   - component: {fileID: 7651355201570975008}
-  - component: {fileID: 3952988759268687947}
   - component: {fileID: 8274202921804613510}
   m_Layer: 7
   m_Name: player
@@ -198,12 +197,12 @@ MonoBehaviour:
   fireball: {fileID: 7059921011307178329, guid: 2b8642800897c1d43908a60ee8bd9a2e,
     type: 3}
   mooo: {fileID: 0}
-  firepillar: {fileID: 4127896414530509490, guid: c690b9f6355b87c43929b1599490566e,
-    type: 3}
+  leidian: {fileID: 1835634940833374000, guid: 2a2306995f16afc4a85b96e68431bbd8, type: 3}
   water: {fileID: 4992271641007664242, guid: a65abe7b0d763954c8550b7611a0f68e, type: 3}
   heldtime: 0.33
   shalldie: 0
   magic: {fileID: 21300000, guid: 8b5cdd882fc571d4ab8837cbd2a5d8e9, type: 3}
+  magicing: 0
   walk: {fileID: 21300000, guid: c193f7ffff5c0f9448d1733c56eb8beb, type: 3}
 --- !u!114 &7651355201570975008
 MonoBehaviour:
@@ -218,22 +217,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: 0
---- !u!114 &3952988759268687947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3635193965342067354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b59244cc0bbfe6448a4c1cd66aaa1e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  isInvincible: 0
-  invincibilityTime: 3
-  spriteRenderer: {fileID: 0}
 --- !u!114 &8274202921804613510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,4 +232,5 @@ MonoBehaviour:
   maxHealth: 100
   isInvincible: 0
   invincibilityTime: 1
+  watering: 0
   spriteRenderer: {fileID: 0}

@@ -7,12 +7,15 @@ public class skill : MonoBehaviour
     // Start is called before the first frame update
     public GameObject fireball;
     public move mooo;
-    public GameObject firepillar;
+    public GameObject leidian;
     public GameObject water;
     public float heldtime = 0.3f;
     float time = 0f;
     bool isfire = false;
     float cdfire = 0.2f;
+    float leitime = 0;
+    bool leidown=false;
+    float cdlei = 1f;
     float magictime = 0.1f;
     Rigidbody rb;
     bool iswater = false;
@@ -39,6 +42,7 @@ public class skill : MonoBehaviour
     void Update()
     {
         cdfire-= Time.deltaTime;
+        cdlei -= Time.deltaTime;
         if (magicing == true && iswater == false && magictime >= 0)
         {
             magictime -= Time.deltaTime;
@@ -98,6 +102,21 @@ public class skill : MonoBehaviour
             ph.watering = false;
             magicing=false;
             rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+        }
+        if (Input.GetKeyDown(KeyCode.E) && magicing == false && cdlei <= 0)
+        {
+            cdlei = 1f;
+            magicing = true;
+            GameObject lei = Instantiate(leidian);
+            if (move.isit == false)
+            {
+                lei.transform.position = new Vector3(transform.position.x - 2.8f, transform.position.y+0.5f, transform.position.z);
+            }
+            else
+            {
+                lei.transform.position = new Vector3(transform.position.x + 2.8f, transform.position.y+0.5f, transform.position.z);
+            }
+            magicing = false;
         }
     }
 }
