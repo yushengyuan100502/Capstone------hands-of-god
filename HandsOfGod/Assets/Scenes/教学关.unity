@@ -6524,12 +6524,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &418931961 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3635193965342067354, guid: 504a541cbacd7b84984560aed316c4ba,
-    type: 3}
-  m_PrefabInstance: {fileID: 989148112}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &420191201
 GameObject:
   m_ObjectHideFlags: 0
@@ -7157,7 +7151,7 @@ GameObject:
   - component: {fileID: 457443158}
   m_Layer: 0
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: ememy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14534,12 +14528,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6021908761996017299, guid: 504a541cbacd7b84984560aed316c4ba,
-        type: 3}
-      propertyPath: fireball
-      value: 
-      objectReference: {fileID: 7059921011307178329, guid: 2b8642800897c1d43908a60ee8bd9a2e,
-        type: 3}
     - target: {fileID: 6241473238247762877, guid: 504a541cbacd7b84984560aed316c4ba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14593,15 +14581,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3635193965342067354, guid: 504a541cbacd7b84984560aed316c4ba,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1264496015}
-    - targetCorrespondingSourceObject: {fileID: 3635193965342067354, guid: 504a541cbacd7b84984560aed316c4ba,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1264496022}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 504a541cbacd7b84984560aed316c4ba, type: 3}
 --- !u!1 &1004600317
 GameObject:
@@ -18349,35 +18329,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 989148112}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1264496015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 418931961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d72cd7d9f0e3e2b41ae0a2b3bbcb9858, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  door: 0
---- !u!114 &1264496022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 418931961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b59244cc0bbfe6448a4c1cd66aaa1e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  isInvincible: 0
-  invincibilityTime: 3
-  spriteRenderer: {fileID: 0}
 --- !u!1 &1268264186
 GameObject:
   m_ObjectHideFlags: 0

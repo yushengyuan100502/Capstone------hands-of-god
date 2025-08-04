@@ -26,6 +26,9 @@ public class move : MonoBehaviour
     bool canup = false;
     bool doing = false;
     public static bool isit = true;
+    public Sprite flash;
+    public float flashtime=0.2f;
+    bool haveflash = false;
     string x = "";
 
     void Start()
@@ -44,6 +47,7 @@ public class move : MonoBehaviour
         bool on_ground = false;
         if (Physics.Raycast(transform.position, Vector3.up, 0.6f)&& (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))&&canup)
         {
+            sr.sprite = flash;
             transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
             rb.velocity = new Vector3(rb.velocity.x, 0, 0);
             canup = false;
@@ -57,9 +61,34 @@ public class move : MonoBehaviour
         }
         if (candown && Input.GetKeyDown(KeyCode.S)&& Physics.Raycast(transform.position, Vector3.down, 1f))
         {
-            transform.position =new Vector3 (transform.position.x, transform.position.y - 2f, transform.position.z);
+            sr.sprite = flash;
+            transform.position = new Vector3(transform.position.x, transform.position.y - 2f, transform.position.z);
             rb.velocity = new Vector3(rb.velocity.x, 0, 0);
             candown = false;
+        }
+        if (sr.sprite==flash)
+        {
+            transform.localScale =new Vector3 (0.2f,0.2f,1f);
+            flashtime -= Time.deltaTime;
+            anims.enabled = false;
+        }
+        if (flashtime<=0)
+        {
+            sr.sprite = leftmove;
+            flashtime = 0.1f;
+            anims.enabled = true;
+            transform.localScale = new Vector3(0.62f, 0.62f, 1f);
+            rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+            if (haveflash == false)
+            {
+                sr.sprite = flash;
+                flashtime = 0.1f;
+                haveflash = true;
+            }
+            else
+            {
+                haveflash = false;
+            }
         }
 
 
@@ -125,15 +154,14 @@ public class move : MonoBehaviour
         {
             candown = true;
         }
-        //if (collision.collider.CompareTag("can't jump") && collision.collider.transform.position.y < transform.position.y)
-        //{
-        //    canup = false;
-        //    print("can't jump");
-        //}
-        //else if (collision.collider.CompareTag("can't jump")==false && collision.collider.transform.position.y < transform.position.y)
-        //{
-        //    canup = true;
-        //}
+        if (collision.collider.CompareTag("can't jump") && collision.collider.transform.position.y < transform.position.y)
+        {
+            canup = false;
+        }
+        else if (collision.collider.CompareTag("can't jump")==false && collision.collider.transform.position.y < transform.position.y)
+        {
+            canup = true;
+        }
     }
 
 }

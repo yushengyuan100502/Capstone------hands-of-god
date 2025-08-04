@@ -15,9 +15,11 @@ GameObject:
   - component: {fileID: 5805223544398039686}
   - component: {fileID: 7315474925357154825}
   - component: {fileID: 6021908761996017299}
+  - component: {fileID: 7651355201570975008}
+  - component: {fileID: 3952988759268687947}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,6 +135,8 @@ MonoBehaviour:
   rightmove: {fileID: 21300000, guid: a3e8fca7ed411784fa47098223fe1d83, type: 3}
   leftmove: {fileID: 21300000, guid: c193f7ffff5c0f9448d1733c56eb8beb, type: 3}
   anims: {fileID: 0}
+  flash: {fileID: 0}
+  flashtime: 0.05
   horizontal_friction_factor: 0.99
 --- !u!136 &5805223544398039686
 CapsuleCollider:
@@ -198,3 +202,32 @@ MonoBehaviour:
   water: {fileID: 4992271641007664242, guid: a65abe7b0d763954c8550b7611a0f68e, type: 3}
   heldtime: 0.3
   shalldie: 0
+--- !u!114 &7651355201570975008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3635193965342067354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d72cd7d9f0e3e2b41ae0a2b3bbcb9858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: 0
+--- !u!114 &3952988759268687947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3635193965342067354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b59244cc0bbfe6448a4c1cd66aaa1e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  isInvincible: 0
+  invincibilityTime: 3
+  spriteRenderer: {fileID: 0}

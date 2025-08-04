@@ -83,10 +83,12 @@ public class skill : MonoBehaviour
             GameObject watershield = Instantiate(water);
             watershield.transform.position = transform.position;
             iswater = true;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
         }
         if (iswater)
         {
             watertime-= Time.deltaTime;
+            rb.constraints=RigidbodyConstraints.FreezeRotation|RigidbodyConstraints.FreezePositionZ;
         }
         if (watertime<=0)
         {
