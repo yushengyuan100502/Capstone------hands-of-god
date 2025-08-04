@@ -9,6 +9,10 @@ TagManager:
   - top
   - lowest
   - ememy
+  - Door
+  - Platform
+  - Obstacle
+  - Fireball
   layers:
   - Default
   - TransparentFX
@@ -18,8 +22,8 @@ TagManager:
   - UI
   - Boss
   - Player
-  - 
-  - 
+  - PhysicalHands
+  - PhysicalHandsReset
   - 
   - 
   - 

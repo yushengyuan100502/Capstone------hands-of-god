@@ -94,13 +94,9 @@ public class move : MonoBehaviour
 
 
         // JUMP
-        if (jumps_remaining > 0 && doing == false)
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space))
         {
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space))
-            {
-                rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
-                jumps_remaining -= 1;
-            }
+            Jump();
         }
 
         float actual_movement_speed = speed;
@@ -161,6 +157,20 @@ public class move : MonoBehaviour
         else if (collision.collider.CompareTag("can't jump")==false && collision.collider.transform.position.y < transform.position.y)
         {
             canup = true;
+        }
+    }
+
+    /// <summary>
+    /// Public method to trigger player jump
+    /// Can be called externally by other scripts
+    /// Supports double jump mechanics
+    /// </summary>
+    public void Jump()
+    {
+        if (jumps_remaining > 0 && doing == false)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, jump, rb.velocity.z);
+            jumps_remaining -= 1;
         }
     }
 

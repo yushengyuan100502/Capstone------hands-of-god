@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.ultraleap.tracking": "7.2.0",
     "com.unity.2d.psdimporter": "8.1.1",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
@@ -49,5 +50,14 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "ultraleap",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.ultraleap"
+      ]
+    }
+  ]
 }
