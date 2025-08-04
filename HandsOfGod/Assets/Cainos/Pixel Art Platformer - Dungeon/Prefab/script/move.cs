@@ -45,7 +45,7 @@ public class move : MonoBehaviour
     void Update()
     {
         bool on_ground = false;
-        if (Physics.Raycast(transform.position, Vector3.up, 0.6f)&& (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))&&canup)
+        if (Physics.Raycast(transform.position, Vector3.up, 0.6f)&& (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)))
         {
             sr.sprite = flash;
             transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
