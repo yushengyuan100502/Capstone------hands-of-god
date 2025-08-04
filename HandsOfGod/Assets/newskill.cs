@@ -98,6 +98,9 @@ public class newskill : MonoBehaviour
             if (statusUI != null)
                 statusUI.FlashLowMana();
         }
+        // Check if player is moving
+        bool isPlayerMoving = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
+        
         // Handle input when not enough mana to start charging
         if ((Input.GetKeyDown(KeyCode.Q) || Input.GetMouseButtonDown(0)) && !HasEnoughMana(fireballManaCost))
         {
@@ -106,8 +109,15 @@ public class newskill : MonoBehaviour
                 statusUI.FlashLowMana();
         }
         
+        // Handle input when player is moving (prevent fireball casting while moving)
+        if ((Input.GetKeyDown(KeyCode.Q) || Input.GetMouseButtonDown(0)) && isPlayerMoving)
+        {
+            Debug.Log("Cannot cast fireball while moving! Stand still to cast.");
+        }
+        
         // Check for both Q key and left mouse button for charging (with mana check)
-        if ((Input.GetKey(KeyCode.Q) || Input.GetMouseButton(0)) && HasEnoughMana(fireballManaCost))
+        // Only allow fireball casting when player is standing still (not pressing A or D)
+        if ((Input.GetKey(KeyCode.Q) || Input.GetMouseButton(0)) && HasEnoughMana(fireballManaCost) && !isPlayerMoving)
         {
             time += Time.deltaTime;
             if (time > heldtime && HasEnoughMana(firePillarManaCost))
@@ -131,6 +141,14 @@ public class newskill : MonoBehaviour
             rb.velocity = new Vector3(0, 0, 0);
             rb.useGravity = false;
 
+        }
+        // Reset charging if player starts moving while charging
+        else if (isPlayerMoving && time > 0)
+        {
+            time = 0f;
+            isfire = false;
+            rb.useGravity = true;
+            Debug.Log("Fireball charging cancelled - player started moving!");
         }
         // Check for both Q key release and left mouse button release
         if (Input.GetKeyUp(KeyCode.Q) || Input.GetMouseButtonUp(0))
