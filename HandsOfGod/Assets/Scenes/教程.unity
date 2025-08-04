@@ -241,7 +241,7 @@ RectTransform:
   m_GameObject: {fileID: 423307485}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 890206555}
@@ -346,8 +346,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "W, A, S, D, control up, down, left, and right. \n\nE opens the shield
-    to resist damage.\n\nQ to shoot a fireball.\n\nF repel the enemy"
+  m_text: "W,A, S, D, control up, down, left, and right. \nw and s can go up and
+    down on the brick.\nPress V at the door to go to next level.\n\nE opens the shield
+    to resist damage.\nQ shoot a fireball.\nF repels the enemy."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
