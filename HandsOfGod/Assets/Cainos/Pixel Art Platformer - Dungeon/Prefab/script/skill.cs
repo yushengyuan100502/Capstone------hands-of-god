@@ -17,6 +17,10 @@ public class skill : MonoBehaviour
     bool iswater = false;
     float watertime = 1.5f;
     public bool shalldie = false;
+    public Sprite magic;
+    public Sprite walk;
+    SpriteRenderer sr;
+    Animator ani;
 
     private GameObject fire;
     
@@ -25,6 +29,8 @@ public class skill : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         mooo = GetComponent<move>();
+        sr= GetComponent<SpriteRenderer>();
+        ani = GetComponent<Animator>();
     }
     void Update()
     {
@@ -77,7 +83,7 @@ public class skill : MonoBehaviour
             isfire = false;
             rb.useGravity = true;
         }
-        if (Input.GetKeyDown(KeyCode.F)&&iswater==false)
+        if (Input.GetKeyDown(KeyCode.F)&&iswater==false && Physics.Raycast(transform.position, Vector3.down))
         {
             shalldie = false;
             GameObject watershield = Instantiate(water);
@@ -88,13 +94,18 @@ public class skill : MonoBehaviour
         if (iswater)
         {
             watertime-= Time.deltaTime;
-            rb.constraints=RigidbodyConstraints.FreezeRotation|RigidbodyConstraints.FreezePositionZ;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+            sr.sprite = magic;
+            ani.enabled = false;
         }
         if (watertime<=0)
         {
             iswater = false;
             shalldie = true;
             watertime = 1.5f;
+            sr.sprite = walk;
+            ani.enabled = true;
+            rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
 
         }
     }
