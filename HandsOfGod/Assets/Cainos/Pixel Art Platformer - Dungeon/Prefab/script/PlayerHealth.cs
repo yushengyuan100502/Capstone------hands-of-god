@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     public bool isInvincible = false; // 无敌状态（受击后短暂无敌）
     public float invincibilityTime = 2.5f;
     private float invincibilityTimer = 0f;
+    public bool watering=false;
     public SpriteRenderer spriteRenderer; // 用于受击闪烁效果
 
     void Start()
@@ -40,7 +41,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (isInvincible) return; // 无敌状态下不受伤害
+        if (isInvincible | watering) return; // 无敌状态下不受伤害
 
         currentHealth -= damage;
         Debug.Log($"玩家受到 {damage} 点伤害，剩余生命值: {currentHealth}");
