@@ -68,7 +68,9 @@ public class PlayerHealth : MonoBehaviour
     if (currentHealth <= 0)
     {
         Die();
-    }
+            string nextSceneName = "5";
+            SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
+        }
 }    private void Die()
     {
         Debug.Log("玩家死亡");
